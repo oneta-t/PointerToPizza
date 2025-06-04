@@ -1,0 +1,28 @@
+#ifndef USER_H
+#define USER_H
+#include <QWidget>
+
+class User
+{
+public:
+    User();
+    User(QString name,QString family,QString passw,QString username,QString phone);
+    int getId() const;
+    QString getFirstName() const;
+    QString getLastName() const;
+    QString getUsername() const;
+    QString getPhone() const;
+    QString getPassword() const;
+
+private:
+    static int NextId;
+    int ID;
+    QString Firstname;
+    QString Lastname;
+    QString Userame;
+    QString Phonenum;
+    QString password;
+
+};
+
+#endif // USER_H
