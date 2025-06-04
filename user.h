@@ -6,13 +6,14 @@ class User
 {
 public:
     User();
-    User(QString name,QString family,QString passw,QString username,QString phone);
+    User(QString name,QString family,QString passw,QString username,QString phone,QString role);
     int getId() const;
     QString getFirstName() const;
     QString getLastName() const;
     QString getUsername() const;
     QString getPhone() const;
     QString getPassword() const;
+    QString getRole()const;
 
 private:
     static int NextId;
@@ -21,8 +22,8 @@ private:
     QString Lastname;
     QString Userame;
     QString Phonenum;
-    QString password;
-
+    QString Password;
+    QString Role;
 };
 
 #endif // USER_H

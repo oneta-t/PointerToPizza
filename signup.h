@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QMessageBox>
 #include "mainwindow.h"
+#include "user.h"
 class MainWindow;
 
 namespace Ui {

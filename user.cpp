@@ -7,13 +7,14 @@ User::User()
     ++NextId;
 }
 
-User::User(QString name,QString family,QString passw,QString username,QString phone)
+User::User(QString name,QString family,QString passw,QString username,QString phone,QString role)
 {
     Firstname=name;
     Lastname=family;
     Phonenum=phone;
     Userame=username;
-    password=passw;
+    Password=passw;
+    Role=role;
     ID=++NextId;
 }
 
@@ -44,9 +45,13 @@ QString User::getPhone() const
 
 QString User::getPassword() const
 {
-    return password;
+    return Password;
 }
 
+QString User::getRole()const
+{
+    return Role;
+}
 
 
 

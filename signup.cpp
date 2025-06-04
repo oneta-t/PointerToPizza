@@ -11,7 +11,6 @@ SignUP::~SignUP()
     delete ui;
 }
 
-
 void SignUP::on_pushButtoYes_clicked()
 {
     QString name=ui->lineEdit_name->text().trimmed();
@@ -20,7 +19,8 @@ void SignUP::on_pushButtoYes_clicked()
     QString password1 = ui->lineEdit_pass->text().trimmed();
     QString password2=ui->lineEdit_pass_2->text().trimmed();
     QString phone= ui->lineEdit_phon->text().trimmed();
-    if (name.isEmpty() || family.isEmpty() || username.isEmpty() || password1.isEmpty() || phone.isEmpty())
+    QString role=ui->comboBoxType->currentText();
+    if (name.isEmpty() || family.isEmpty() || username.isEmpty() || password1.isEmpty() || phone.isEmpty() ||ui->comboBoxType->currentIndex() == 0)
     {
         QMessageBox::warning(this, "خطا", "لطفاً همه‌ی فیلدها را پر کنید");
         return;
@@ -31,6 +31,9 @@ void SignUP::on_pushButtoYes_clicked()
         return;
     }
 
+    User *newUser = new User(name, family, password1, username, phone, role);
+
+    QMessageBox::information(this, "ثبت‌نام موفق", "ثبت‌نام با موفقیت انجام شد!");
     this->hide();
     mainW->show();
 }
