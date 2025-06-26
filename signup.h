@@ -4,6 +4,8 @@
 #include <QMessageBox>
 #include "mainwindow.h"
 #include "user.h"
+#include "customer.h"
+#include "usermanager.h"
 class MainWindow;
 
 namespace Ui {

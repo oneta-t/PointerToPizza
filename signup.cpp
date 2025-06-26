@@ -31,8 +31,15 @@ void SignUP::on_pushButtoYes_clicked()
         return;
     }
 
-    User *newUser = new User(name, family, password1, username, phone, role);
-
+    if(role=="مشتری")
+    {
+        Customer *newCustomer = new Customer(name, family, password1, username, phone, role);
+        UserManager::instance().addCustomer(newCustomer);
+    }
+    if(role=="مدیر رستوران")
+    {
+        //this is for resturant manager
+    }
     QMessageBox::information(this, "ثبت‌نام موفق", "ثبت‌نام با موفقیت انجام شد!");
     this->hide();
     mainW->show();
