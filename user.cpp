@@ -1,26 +1,22 @@
 #include "user.h"
 
-int User::NextId=0;
-
-User::User()
-{
-    ++NextId;
-}
-
 User::User(QString name,QString family,QString passw,QString username,QString phone,QString role)
 {
     Firstname=name;
     Lastname=family;
     Phonenum=phone;
-    Userame=username;
+    Username=username;
     Password=passw;
     Role=role;
-    ID=++NextId;
 }
 
-int User::getId() const
+User::User()
 {
-    return ID;
+    Firstname="user";
+    Lastname="";
+    Phonenum="000";
+    Username="user0";
+    Password="123";
 }
 
 QString User::getFirstName() const
@@ -35,7 +31,7 @@ QString User::getLastName() const
 
 QString User::getUsername() const
 {
-    return Userame;
+    return Username;
 }
 
 QString User::getPhone() const
