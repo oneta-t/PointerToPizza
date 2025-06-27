@@ -9,8 +9,11 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    fooditeam.cpp \
     main.cpp \
     mainwindow.cpp \
+    menu.cpp \
+    restaurant.cpp \
     restaurantmanager.cpp \
     customer.cpp \
     signin.cpp \
@@ -18,7 +21,10 @@ SOURCES += \
     user.cpp
 
 HEADERS += \
+    fooditeam.h \
     mainwindow.h \
+    menu.h \
+    restaurant.h \
     restaurantmanager.h \
     customer.h \
     signin.h \
@@ -26,8 +32,11 @@ HEADERS += \
     user.h
 
 FORMS += \
+    fooditeam.ui \
     mainwindow.ui \
     customer.ui \
+    menu.ui \
+    restaurant.ui \
     restaurantmanager.ui \
     signin.ui \
     signup.ui

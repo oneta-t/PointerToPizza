@@ -20,8 +20,8 @@ public:
 
 private:
     Ui::Customer *ui;
-    static int NextId;
-    int ID;
+    static int NextIdC;
+    int IDC;
 };
 
 #endif // CUSTOMER_H
