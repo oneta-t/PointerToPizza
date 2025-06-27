@@ -2,7 +2,9 @@
 #define RESTAURANTMANAGER_H
 
 #include <QWidget>
+#include <QList>
 #include "user.h"
+#include "restaurant.h"
 
 namespace Ui {
 class RestaurantManager;
@@ -20,8 +22,10 @@ public:
 
 private:
     Ui::RestaurantManager *ui;
-    static int NextId;
-    int ID;
+    static int NextIdRM;
+    int IDRM;
+    QList<Restauran> restaurants;
+
 };
 
 #endif // RESTAURANTMANAGER_H

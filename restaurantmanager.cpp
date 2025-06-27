@@ -11,6 +11,10 @@ RestaurantManager::~RestaurantManager()
     delete ui;
 }
 
-int RestaurantManager::NextId=0;
+int RestaurantManager::NextIdRM=0;
 
-RestaurantManager::RestaurantManager(QString name,QString family,QString passw,QString username,QString phone,QString role):User(name,family,passw,username,phone,role){}
+RestaurantManager::RestaurantManager(QString name,QString family,QString passw,QString username,QString phone,QString role):User(name,family,passw,username,phone,role)
+{
+    IdRM = NextIdRM++;
+    restaurants=nullptr;
+}
