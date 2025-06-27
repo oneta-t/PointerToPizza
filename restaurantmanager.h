@@ -8,7 +8,7 @@ namespace Ui {
 class RestaurantManager;
 }
 
-class RestaurantManager : public QWidget
+class RestaurantManager : public QWidget ,public User
 {
     Q_OBJECT
 

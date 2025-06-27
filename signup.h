@@ -5,7 +5,7 @@
 #include "mainwindow.h"
 #include "user.h"
 #include "customer.h"
-#include "usermanager.h"
+#include "restaurantmanager.h"
 class MainWindow;
 
 namespace Ui {

@@ -14,6 +14,6 @@ SignIn::~SignIn()
 void SignIn::on_signInButto_clicked()
 {
     this->hide();
-    mainW->show();   //we have to used user page or ... for this
+    mainW->show();   // اینجا ما باید در لیست بگردیم و چک کنیم و صفحه ی هر کس را بیاوریم برایش
 }
 

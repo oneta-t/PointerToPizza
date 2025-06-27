@@ -12,7 +12,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     restaurantmanager.cpp \
-    usermanager.cpp \
     customer.cpp \
     signin.cpp \
     signup.cpp \
@@ -21,7 +20,6 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     restaurantmanager.h \
-    usermanager.h \
     customer.h \
     signin.h \
     signup.h \

@@ -34,11 +34,11 @@ void SignUP::on_pushButtoYes_clicked()
     if(role=="مشتری")
     {
         Customer *newCustomer = new Customer(name, family, password1, username, phone, role);
-        UserManager::instance().addCustomer(newCustomer);
+        //UserManager::instance().addCustomer(newCustomer); // این بخش دیگه با مدیر سیستم هست
     }
     if(role=="مدیر رستوران")
     {
-        //this is for resturant manager
+        RestaurantManager *newRestaurantM = new RestaurantManager(name, family, password1, username, phone, role);
     }
     QMessageBox::information(this, "ثبت‌نام موفق", "ثبت‌نام با موفقیت انجام شد!");
     this->hide();
