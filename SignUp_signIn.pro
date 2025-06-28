@@ -16,6 +16,7 @@ SOURCES += \
     restaurant.cpp \
     restaurantmanager.cpp \
     customer.cpp \
+    restaurantregistration.cpp \
     signin.cpp \
     signup.cpp \
     user.cpp
@@ -27,6 +28,7 @@ HEADERS += \
     restaurant.h \
     restaurantmanager.h \
     customer.h \
+    restaurantregistration.h \
     signin.h \
     signup.h \
     user.h
@@ -38,6 +40,7 @@ FORMS += \
     menu.ui \
     restaurant.ui \
     restaurantmanager.ui \
+    restaurantregistration.ui \
     signin.ui \
     signup.ui
 

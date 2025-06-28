@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QList>
+#include <QTime>
 #include "menu.h"
 
 namespace Ui {
@@ -24,7 +25,10 @@ private:
     int IdR;
     QString Name;
     QString Location;
+    QString StartTime;
+    QString EndTime;
     Menu menuF;
+    //اینجا حتی میشه برای اینکه مثلا چه رئزهای هفته ای هستند هم چیز میز گذاشت
     //سفارشات
 
 };

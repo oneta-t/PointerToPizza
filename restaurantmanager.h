@@ -5,6 +5,7 @@
 #include <QList>
 #include "user.h"
 #include "restaurant.h"
+#include "restaurantregistration.h"
 
 namespace Ui {
 class RestaurantManager;
