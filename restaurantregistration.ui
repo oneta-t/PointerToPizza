@@ -103,7 +103,7 @@
     <string>ساعت پایان کار :</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="name">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -113,7 +113,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="address">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -123,7 +123,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTimeEdit" name="timeEdit">
+  <widget class="QTimeEdit" name="start">
    <property name="geometry">
     <rect>
      <x>77</x>
@@ -133,7 +133,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTimeEdit" name="timeEdit_2">
+  <widget class="QTimeEdit" name="end">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -143,7 +143,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pushButtonOK">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -165,7 +165,7 @@ color: rgb(0, 0, 0);</string>
     <string>تایید </string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="pushButtonBack">
    <property name="geometry">
     <rect>
      <x>180</x>
