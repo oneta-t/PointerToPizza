@@ -1,36 +1,35 @@
-#ifndef RESTAURANT_H
-#define RESTAURANT_H
+#ifndef RESTAURANTF_H
+#define RESTAURANTF_H
 
 #include <QWidget>
 #include <QList>
 #include <QTime>
-#include "menu.h"
+#include "menuf.h"
 
 namespace Ui {
-class Restaurant;
+class RestaurantF;
 }
 
-class Restaurant : public QWidget
+class RestaurantF : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Restaurant(QWidget *parent = nullptr);
-    Restaurant(QString name,QString location);//شاید باید منو هم باشه اینجا
-    ~Restaurant();
+    explicit RestaurantF(QWidget *parent = nullptr);
+    RestaurantF(QString name,QString location ,QString start,QString end );//شاید باید منو هم باشه اینجا
+    ~RestaurantF();
 
 private:
-    Ui::Restauran *ui;
+    Ui::RestaurantF *ui;
     static int NextIdR;
     int IdR;
     QString Name;
     QString Location;
     QString StartTime;
     QString EndTime;
-    Menu menuF;
+    MenuF menuF;
     //اینجا حتی میشه برای اینکه مثلا چه رئزهای هفته ای هستند هم چیز میز گذاشت
     //سفارشات
-
 };
 
-#endif // RESTAURANT_H
+#endif // RESTAURANTF_H

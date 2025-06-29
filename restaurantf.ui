@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Restauran</class>
- <widget class="QWidget" name="Restauran">
+ <class>RestaurantF</class>
+ <widget class="QWidget" name="RestaurantF">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>883</width>
-    <height>627</height>
+    <width>822</width>
+    <height>522</height>
    </rect>
   </property>
   <property name="windowTitle">
