@@ -4,7 +4,7 @@
 RestaurantManager::RestaurantManager(QWidget *parent): QWidget(parent), ui(new Ui::RestaurantManager)
 {
     ui->setupUi(this);
-    this->Registration=new RestaurantRegistration;
+    this->Registration=new RestaurantRegistration(this);
 }
 
 RestaurantManager::~RestaurantManager()
