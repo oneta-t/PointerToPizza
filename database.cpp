@@ -18,6 +18,7 @@ Database::Database() {
     // تلاش برای اتصال به دیتابیس
     if (!db.open()) {
         qCritical() << "Cannot open database:" << db.lastError().text();
+        exit(1); // خاتمه برنامه
     } else {
         qDebug() << "Database connected.";
     }
