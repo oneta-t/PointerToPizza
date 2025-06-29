@@ -3,7 +3,10 @@
 
 #include <QWidget>
 #include "mainwindow.h"
+#include "RestaurantManager.h"
+
 class MainWindow;
+class RestaurantManager;
 
 namespace Ui {
 class SignIn;
@@ -23,6 +26,7 @@ private slots:
 private:
     Ui::SignIn *ui;
     MainWindow *mainW;
+    RestaurantManager * restaurantM;
 };
 
 #endif // SIGNIN_H
