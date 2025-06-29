@@ -29,7 +29,7 @@ private:
     Ui::RestaurantManager *ui;
     static int NextIdRM;
     int IdRM;
-    QList<RestaurantF> restaurants;
+    QList<RestaurantF*> restaurants;
     RestaurantRegistration * Registration;
 
 };

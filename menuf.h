@@ -21,7 +21,7 @@ public:
 
 private:
     Ui::MenuF *ui;
-    QList<FoodIteam> foods;
+    QList<FoodIteam*> foods;
 };
 
 #endif // MENUF_H

@@ -15,7 +15,6 @@ public:
     QString getRole()const;
 
 private:
-
     QString Firstname;
     QString Lastname;
     QString Username;

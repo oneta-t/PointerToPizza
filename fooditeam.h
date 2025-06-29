@@ -14,6 +14,7 @@ class FoodIteam : public QWidget
 public:
     explicit FoodIteam(QWidget *parent = nullptr);
     FoodIteam(QString foodName,QString type,float price);
+    float getPrice() const;
     ~FoodIteam();
 
 private:

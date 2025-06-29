@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "user.h"
+#include "cart.h"
 
 namespace Ui {
 class Customer;
@@ -22,6 +23,7 @@ private:
     Ui::Customer *ui;
     static int NextIdC;
     int IdC;
+    Cart *cart;
 };
 
 #endif // CUSTOMER_H

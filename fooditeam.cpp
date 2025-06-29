@@ -20,3 +20,5 @@ FoodIteam::FoodIteam(QString foodName,QString type,float price)
     Price=price;
     Type=type;
 }
+
+float FoodIteam::getPrice() const { return Price; } // تابع getter برای دسترسی به Price

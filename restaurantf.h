@@ -27,7 +27,7 @@ private:
     QString Location;
     QString StartTime;
     QString EndTime;
-    MenuF menuF;
+    MenuF *menuF;
     //اینجا حتی میشه برای اینکه مثلا چه رئزهای هفته ای هستند هم چیز میز گذاشت
     //سفارشات
 };
