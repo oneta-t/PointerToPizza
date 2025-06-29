@@ -2,6 +2,7 @@
 #define RESTAURANTREGISTRATION_H
 
 #include <QWidget>
+#include "restaurantf.h"
 
 namespace Ui {
 class RestaurantRegistration;
@@ -14,6 +15,9 @@ class RestaurantRegistration : public QWidget
 public:
     explicit RestaurantRegistration(QWidget *parent = nullptr);
     ~RestaurantRegistration();
+
+private slots:
+    void on_pushButtonOK_clicked();
 
 private:
     Ui::RestaurantRegistration *ui;

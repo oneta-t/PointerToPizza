@@ -4,6 +4,7 @@
 SignIn::SignIn(MainWindow* mainW,QWidget *parent): QWidget(parent), ui(new Ui::SignIn),mainW(mainW)
 {
     ui->setupUi(this);
+    this->restaurantM = new RestaurantManager;
 }
 
 SignIn::~SignIn()
@@ -14,6 +15,8 @@ SignIn::~SignIn()
 void SignIn::on_signInButto_clicked()
 {
     this->hide();
-    mainW->show();   // اینجا ما باید در لیست بگردیم و چک کنیم و صفحه ی هر کس را بیاوریم برایش
+    QString username = ui->lineEdit_username->text().trimmed();
+    QString password1 = ui->lineEdit_pass->text().trimmed();// خطررررررر
+    this->restaurantM->show();   // اینجا ما باید در لیست بگردیم و چک کنیم و صفحه ی هر کس را بیاوریم برایش
 }
 

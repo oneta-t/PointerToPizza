@@ -4,7 +4,7 @@
 RestaurantManager::RestaurantManager(QWidget *parent): QWidget(parent), ui(new Ui::RestaurantManager)
 {
     ui->setupUi(this);
-    this->RestaurantRegistration=new RestaurantRegistration(this);
+    this->Registration=new RestaurantRegistration;
 }
 
 RestaurantManager::~RestaurantManager()
@@ -17,12 +17,11 @@ int RestaurantManager::NextIdRM=0;
 RestaurantManager::RestaurantManager(QString name,QString family,QString passw,QString username,QString phone,QString role):User(name,family,passw,username,phone,role)
 {
     IdRM = NextIdRM++;
-    restaurants=nullptr;
 }
 
 void RestaurantManager::on_AddRestaurant_clicked()
 {
     this->hide();
-    this->RestaurantManager.show();
+    this->Registration->show();
 }
 

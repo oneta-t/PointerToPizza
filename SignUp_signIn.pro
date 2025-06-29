@@ -12,8 +12,8 @@ SOURCES += \
     fooditeam.cpp \
     main.cpp \
     mainwindow.cpp \
-    menu.cpp \
-    restaurant.cpp \
+    menuf.cpp \
+    restaurantf.cpp \
     restaurantmanager.cpp \
     customer.cpp \
     restaurantregistration.cpp \
@@ -24,8 +24,8 @@ SOURCES += \
 HEADERS += \
     fooditeam.h \
     mainwindow.h \
-    menu.h \
-    restaurant.h \
+    menuf.h \
+    restaurantf.h \
     restaurantmanager.h \
     customer.h \
     restaurantregistration.h \
@@ -37,8 +37,8 @@ FORMS += \
     fooditeam.ui \
     mainwindow.ui \
     customer.ui \
-    menu.ui \
-    restaurant.ui \
+    menuf.ui \
+    restaurantf.ui \
     restaurantmanager.ui \
     restaurantregistration.ui \
     signin.ui \

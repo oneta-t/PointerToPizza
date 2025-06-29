@@ -4,8 +4,9 @@
 #include <QWidget>
 #include <QList>
 #include "user.h"
-#include "restaurant.h"
+#include "restaurantf.h"
 #include "restaurantregistration.h"
+class RestaurantRegistration;
 
 namespace Ui {
 class RestaurantManager;
@@ -21,11 +22,15 @@ public:
     int getId() const;
     ~RestaurantManager();
 
+private slots:
+    void on_AddRestaurant_clicked();
+
 private:
     Ui::RestaurantManager *ui;
     static int NextIdRM;
-    int IDRM;
-    QList<Restauran> restaurants;
+    int IdRM;
+    QList<RestaurantF> restaurants;
+    RestaurantRegistration * Registration;
 
 };
 

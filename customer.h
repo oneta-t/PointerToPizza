@@ -21,7 +21,7 @@ public:
 private:
     Ui::Customer *ui;
     static int NextIdC;
-    int IDC;
+    int IdC;
 };
 
 #endif // CUSTOMER_H
