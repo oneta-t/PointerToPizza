@@ -13,12 +13,19 @@ FoodIteam::~FoodIteam()
 
 int FoodIteam::NextIdF = 0;
 
-FoodIteam::FoodIteam(QString foodName,QString type,float price)
+FoodIteam::FoodIteam(QString foodName, QString ingredients, QString type, float price)
 {
     IdF=NextIdF++;
     FoodName=foodName;
+    Ingredients=ingredients;
     Price=price;
     Type=type;
 }
 
-float FoodIteam::getPrice() const { return Price; } // تابع getter برای دسترسی به Price
+QString FoodIteam::getFoodName() const { return FoodName; }
+
+QString FoodIteam::getType() const { return Type; }
+
+float FoodIteam::getPrice() const { return Price; }
+
+QString FoodIteam::getIngredients()const { return Ingredients;}

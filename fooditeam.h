@@ -13,7 +13,10 @@ class FoodIteam : public QWidget
 
 public:
     explicit FoodIteam(QWidget *parent = nullptr);
-    FoodIteam(QString foodName,QString type,float price);
+    FoodIteam(QString foodName,QString ingredients,QString type,float price);
+    QString getFoodName() const;
+    QString getIngredients()const;
+    QString getType() const;
     float getPrice() const;
     ~FoodIteam();
 
@@ -23,6 +26,7 @@ private:
     int IdF;
     QString FoodName;
     QString Type;
+    QString Ingredients;
     float Price;
 
 };

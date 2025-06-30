@@ -16,12 +16,13 @@ class MenuF : public QWidget
 public:
     explicit MenuF(QWidget *parent = nullptr);
     ~MenuF();
+    void addFoodItem(FoodIteam* foodItem);
     // احتمالا بعدا ی طوری بریم که مثلا برا نمایش بیایم و طبق نوع غذا ها دسته بندی کنیم
 
 
 private:
     Ui::MenuF *ui;
-    QList<FoodIteam*> foods;
+    QList<FoodIteam*> FoodItems;
 };
 
 #endif // MENUF_H

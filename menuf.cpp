@@ -10,3 +10,8 @@ MenuF::~MenuF()
 {
     delete ui;
 }
+
+void MenuF::addFoodItem(FoodIteam* foodItem)
+{
+    FoodItems.append(foodItem);
+}
