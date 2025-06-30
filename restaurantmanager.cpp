@@ -4,7 +4,11 @@
 RestaurantManager::RestaurantManager(QWidget *parent): QWidget(parent), ui(new Ui::RestaurantManager)
 {
     ui->setupUi(this);
-    this->Registration=new RestaurantRegistration(this);
+    this->Registration = new RestaurantRegistration(this);
+
+    // ایجاد مدل رستوران و اتصال آن به QListView
+    restaurantModel = new RestaurantModel(this);
+    ui->listViewRestaurants->setModel(restaurantModel); // اتصال مدل به QListView
 }
 
 RestaurantManager::~RestaurantManager()

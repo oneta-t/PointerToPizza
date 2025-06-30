@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>717</width>
-    <height>438</height>
+    <width>802</width>
+    <height>584</height>
    </rect>
   </property>
   <property name="font">
@@ -24,10 +24,10 @@
   <widget class="QPushButton" name="AddRestaurant">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>60</y>
-     <width>221</width>
-     <height>111</height>
+     <x>30</x>
+     <y>40</y>
+     <width>171</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="font">
@@ -41,6 +41,16 @@ background-color: rgb(102, 110, 255);</string>
    </property>
    <property name="text">
     <string>ایجاد رستوران</string>
+   </property>
+  </widget>
+  <widget class="QListView" name="listViewRestaurants">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>40</y>
+     <width>391</width>
+     <height>192</height>
+    </rect>
    </property>
   </widget>
  </widget>

@@ -6,13 +6,63 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>822</width>
-    <height>522</height>
+    <width>943</width>
+    <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>20</y>
+     <width>241</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addMenu">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>100</y>
+     <width>321</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(102, 110, 255);</string>
+   </property>
+   <property name="text">
+    <string>اضافه کردن غذای جدید به منو</string>
+   </property>
+  </widget>
+  <widget class="QListView" name="listView">
+   <property name="geometry">
+    <rect>
+     <x>35</x>
+     <y>180</y>
+     <width>871</width>
+     <height>391</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

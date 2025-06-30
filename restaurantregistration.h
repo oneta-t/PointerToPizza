@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "restaurantf.h"
 #include "restaurantmanager.h"
+#include "restaurantmodel.h"
 
 class RestaurantManager;
 

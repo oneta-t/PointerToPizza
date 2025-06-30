@@ -18,6 +18,12 @@ public:
     explicit RestaurantF(QWidget *parent = nullptr);
     RestaurantF(QString name,QString location ,QString start,QString end );//شاید باید منو هم باشه اینجا
     ~RestaurantF();
+    int getIdR() const ;
+    QString getName() const ;
+    QString getLocation() const ;
+    QString getStartTime() const ;
+    QString getEndTime() const ;
+    MenuF* getMenuF() const;
 
 private:
     Ui::RestaurantF *ui;

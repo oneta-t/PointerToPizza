@@ -21,3 +21,15 @@ RestaurantF::RestaurantF(QString name,QString location,QString start,QString end
     StartTime=start;
     EndTime=end;
 }
+
+int RestaurantF::getIdR() const { return IdR; }
+
+QString RestaurantF::getName() const { return Name; }
+
+QString RestaurantF::getLocation() const { return Location; }
+
+QString RestaurantF::getStartTime() const { return StartTime; }
+
+QString RestaurantF::getEndTime() const { return EndTime; }
+
+MenuF* RestaurantF::getMenuF() const { return menuF; }
