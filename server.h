@@ -31,7 +31,13 @@ private:
     // توابع مدیریت درخواست های  مختلف
     void handleRegister(const QJsonObject& json, QTcpSocket* client);
     void handleLogin(const QJsonObject& json, QTcpSocket* client);
+    void handleGetRestaurants(QTcpSocket* client);
+    void handleGetMenu(const QJsonObject& json, QTcpSocket* client);
     void handleOrder(const QJsonObject& json, QTcpSocket* client);
+    void handleGetMyOrders(QTcpSocket* client);
+    void handleChangeOrderStatus(const QJsonObject& json, QTcpSocket* client);
+    void handleGetOrdersForRestaurant(QTcpSocket* client);
+    void handleAddMenuItem(const QJsonObject& json, QTcpSocket* client);
     void notifyRestaurant(int restaurantId, const QString& message);
 
     QMap<qintptr, QTcpSocket*> clients; // ارتباط دادن شناسه سوکت به آبجکت سوکت کلاینت
