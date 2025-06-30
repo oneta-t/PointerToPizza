@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     cart.cpp \
+    createfood.cpp \
     fooditeam.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
     restaurantf.cpp \
     restaurantmanager.cpp \
     customer.cpp \
+    restaurantmodel.cpp \
     restaurantregistration.cpp \
     signin.cpp \
     signup.cpp \
@@ -24,12 +26,14 @@ SOURCES += \
 
 HEADERS += \
     cart.h \
+    createfood.h \
     fooditeam.h \
     mainwindow.h \
     menuf.h \
     restaurantf.h \
     restaurantmanager.h \
     customer.h \
+    restaurantmodel.h \
     restaurantregistration.h \
     signin.h \
     signup.h \
@@ -37,6 +41,7 @@ HEADERS += \
 
 FORMS += \
     cart.ui \
+    createfood.ui \
     fooditeam.ui \
     mainwindow.ui \
     customer.ui \

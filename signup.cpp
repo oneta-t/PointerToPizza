@@ -31,16 +31,49 @@ void SignUP::on_pushButtoYes_clicked()
         return;
     }
 
-    if(role=="مشتری")
+    UserRepository userRepo; // ایجاد یک نمونه از UserRepository
+
+    // بررسی وجود نام کاربری
+    if (userRepo.userExists(username))
     {
-        Customer *newCustomer = new Customer(name, family, password1, username, phone, role);
-        //UserManager::instance().addCustomer(newCustomer); // این بخش دیگه با مدیر سیستم هست
+        QMessageBox::warning(this, "خطا", "نام کاربری قبلاً وجود دارد.");
+        return; // اگر نام کاربری وجود داشته باشد، از ادامه اجرای کد جلوگیری می‌کند.
     }
-    if(role=="مدیر رستوران")
+
+    if (role == "مشتری")
     {
-        RestaurantManager *newRestaurantM = new RestaurantManager(name, family, password1, username, phone, role);
+        if (userRepo.userExists(username))
+        {
+            QMessageBox::warning(this, "خطا", "نام کاربری قبلاً وجود دارد.");
+            return;
+        }
+
+        // اضافه کردن کاربر به پایگاه داده
+        if (userRepo.addUser(username, password1, "مشتری"))
+        {
+            QMessageBox::information(this, "ثبت‌نام موفق", "ثبت‌نام با موفقیت انجام شد!");
+            this->hide();
+            mainW->show();
+        } else {
+            QMessageBox::warning(this, "خطا", "ثبت‌نام ناموفق بود. لطفاً دوباره امتحان کنید.");
+        }
     }
-    QMessageBox::information(this, "ثبت‌نام موفق", "ثبت‌نام با موفقیت انجام شد!");
+
+    if (role == "مدیر رستوران") {
+        if (userRepo.userExists(username)) {
+            QMessageBox::warning(this, "خطا", "نام کاربری قبلاً وجود دارد.");
+            return;
+        }
+
+        // اضافه کردن مدیر رستوران به پایگاه داده
+        if (userRepo.addUser(username, password1, "مدیر رستوران")) {
+            QMessageBox::information(this, "ثبت‌نام موفق", "ثبت‌نام با موفقیت انجام شد!");
+            this->hide();
+            mainW->show();
+        } else {
+            QMessageBox::warning(this, "خطا", "ثبت‌نام ناموفق بود. لطفاً دوباره امتحان کنید.");
+        }
+    }
     this->hide();
     mainW->show();
 }
