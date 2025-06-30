@@ -59,6 +59,18 @@ void Server::readClientData() {
         handleLogin(json, client);
     } else if (type == "order") {
         handleOrder(json, client);
+    } else if (type == "get_restaurants") {
+        handleGetRestaurants(client);
+    } else if (type == "get_menu") {
+        handleGetMenu(json, client);
+    } else if (type == "get_my_order") {
+        handleGetMyOrders(client);
+    } else if (type == "change_order_status") {
+        handleChangeOrderStatus(json, client);
+    } else if (type == "get_orders_for_restuarant") {
+        handleGetOrdersForRestaurant(client);
+    } else if (type == "add_menu_item") {
+        handleAddMenuItem(json, client);
     } else {
         QJsonObject response;
         response["status"] = "error";
@@ -122,6 +134,58 @@ void Server::handleLogin(const QJsonObject& json, QTcpSocket* client) {
     client->write(QJsonDocument(response).toJson());
 }
 
+void Server::handleGetRestaurants(QTcpSocket* client) {
+    QSqlQuery query(Database::instance().getConnection());
+    QJsonArray restaurantArray;
+
+    if (query.exec("SELECT id, name FROM restaurants WHERE status = 'approved'")) {
+        while (query.next()) {
+            QJsonObject rest;
+            rest["id"] = query.value("id").toInt();
+            rest["name"] = query.value("name").toString();
+            restaurantArray.append(rest);
+        }
+        QJsonObject response;
+        response["status"] = "success";
+        response["restaurants"] = restaurantArray;
+        client->write(QJsonDocument(response).toJson());
+    } else {
+        QJsonObject response {
+            {"status", "error"},
+            {"message", "Could not fetch restaurants"}
+        };
+        client->write(QJsonDocument(response).toJson());
+    }
+}
+
+void Server::handleGetMenu(const QJsonObject& json, QTcpSocket* client) {
+    int restaurantId = json["restaurant_id"].toInt();
+    QSqlQuery query(Database::instance().getConnection());
+    QJsonArray menuArray;
+
+    query.prepare("SELECT id, name, price FROM menu_items WHERE restaurant_id = :rid");
+    query.bindValue(":rid", restaurantId);
+    if (query.exec()) {
+        while (query.next()) {
+            QJsonObject item;
+            item["item_id"] = query.value("id").toInt();
+            item["name"] = query.value("name").toString();
+            item["price"] = query.value("price").toDouble();
+            menuArray.append(item);
+        }
+        QJsonObject response;
+        response["status"] = "success";
+        response["menu"] = menuArray;
+        client->write(QJsonDocument(response).toJson());
+    } else {
+        QJsonObject response {
+            {"status", "error"},
+            {"message", "Failed to get menu"}
+        };
+        client->write(QJsonDocument(response).toJson());
+    }
+}
+
 // پردازش درخواست سفارش
 void Server::handleOrder(const QJsonObject& json, QTcpSocket* client) {
     int userId = clientUserIds.value(client->socketDescriptor(), -1);
@@ -183,6 +247,223 @@ void Server::handleOrder(const QJsonObject& json, QTcpSocket* client) {
         QString notification = QString("{\"type\":\"new_order\",\"order_id\":%1}")
                                    .arg(orderId);
         notifyRestaurant(restaurantId, notification);
+    }
+
+    client->write(QJsonDocument(response).toJson());
+}
+
+void Server::handleGetMyOrders(QTcpSocket* client) {
+    int userId = clientUserIds.value(client->socketDescriptor(), -1);
+    QJsonObject response;
+
+    if (userId == -1) {
+        response["status"] = "error";
+        response["message"] = "Not logged in";
+        client->write(QJsonDocument(response).toJson());
+        return;
+    }
+
+    QSqlQuery query(Database::instance().getConnection());
+    query.prepare(R"(
+        SELECT orders.order_id, restaurants.name, orders.status, orders.create_at
+        FROM orders
+        JOIN restaurants ON orders.restaurant_id = restaurants.id
+        WHERE orders.user_id = :uid
+        ORDER BY orders.create_at DESC
+    )");
+    query.bindValue(":uid", userId);
+
+    QJsonArray orderArray;
+    if (query.exec()) {
+        while (query.next()) {
+            QJsonObject order;
+            order["order_id"] = query.value("order_id").toInt();
+            order["restaurant_name"] = query.value("name").toString();
+            order["status"] = query.value("status").toString();
+            order["date"] = query.value("create_at").toString();
+            orderArray.append(order);
+        }
+        response["status"] = "success";
+        response["orders"] = orderArray;
+    } else {
+        response["status"] = "error";
+        response["message"] = "Failed to retrieve orders";
+    }
+
+    client->write(QJsonDocument(response).toJson());
+}
+
+void Server::handleChangeOrderStatus(const QJsonObject& json, QTcpSocket* client) {
+    int userId = clientUserIds.value(client->socketDescriptor(), -1);
+    int orderId = json["order_id"].toInt();
+    QString newStatus = json["new_status"].toString();
+
+    QJsonObject response;
+
+    if (userId == -1) {
+        response["status"] = "error";
+        response["message"] = "Not logged in";
+        client->write(QJsonDocument(response).toJson());
+        return;
+    }
+
+    // بررسی اینکه این سفارش مال رستورانی هست که این کاربر صاحبشه
+    QSqlQuery verify(Database::instance().getConnection());
+    verify.prepare(R"(
+        SELECT o.user_id
+        FROM orders o
+        JOIN restaurants r ON o.restaurant_id = r.id
+        WHERE o.order_id = :oid AND r.owner_id = :uid
+    )");
+    verify.bindValue(":oid", orderId);
+    verify.bindValue(":uid", userId);
+
+    if (verify.exec() && verify.next()) {
+        int customerId = verify.value("user_id").toInt();
+
+        QSqlQuery update(Database::instance().getConnection());
+        update.prepare("UPDATE orders SET status = :status WHERE order_id = :oid");
+        update.bindValue(":status", newStatus);
+        update.bindValue(":oid", orderId);
+
+        if (update.exec()) {
+            response["status"] = "success";
+            response["message"] = "Order updated";
+
+            // ارسال نوتیف به مشتری
+            for (auto it = clientUserIds.begin(); it != clientUserIds.end(); ++it) {
+                if (it.value() == customerId) {
+                    QTcpSocket* customerClient = clients[it.key()];
+                    if (customerClient) {
+                        QJsonObject notif {
+                            {"type", "order_status_update"},
+                            {"order_id", orderId},
+                            {"new_status", newStatus}
+                        };
+                        customerClient->write(QJsonDocument(notif).toJson());
+                    }
+                }
+            }
+        } else {
+            response["status"] = "error";
+            response["message"] = "DB update failed";
+        }
+    } else {
+        response["status"] = "error";
+        response["message"] = "Unauthorized or order not found";
+    }
+
+    client->write(QJsonDocument(response).toJson());
+}
+
+void Server::handleGetOrdersForRestaurant(QTcpSocket* client) {
+    int ownerId = clientUserIds.value(client->socketDescriptor(), -1);
+    QJsonObject response;
+
+    if (ownerId == -1) {
+        response["status"] = "error";
+        response["message"] = "Not logged in";
+        client->write(QJsonDocument(response).toJson());
+        return;
+    }
+
+    QSqlQuery restQuery(Database::instance().getConnection());
+    restQuery.prepare("SELECT id FROM restaurants WHERE owner_id = :oid AND status = 'approved'");
+    restQuery.bindValue(":oid", ownerId);
+    if (!restQuery.exec() || !restQuery.next()) {
+        response["status"] = "error";
+        response["message"] = "Restaurant not found";
+        client->write(QJsonDocument(response).toJson());
+        return;
+    }
+
+    int restId = restQuery.value("id").toInt();
+
+    QSqlQuery orderQuery(Database::instance().getConnection());
+    orderQuery.prepare("SELECT order_id, user_id, status FROM orders WHERE restaurant_id = :rid ORDER BY order_id DESC");
+    orderQuery.bindValue(":rid", restId);
+
+    QJsonArray ordersArray;
+    if (orderQuery.exec()) {
+        while (orderQuery.next()) {
+            int orderId = orderQuery.value("order_id").toInt();
+            int customerId = orderQuery.value("user_id").toInt();
+            QString status = orderQuery.value("status").toString();
+
+            QJsonArray itemArray;
+            QSqlQuery items(Database::instance().getConnection());
+            items.prepare(R"(
+                SELECT oi.item_id, mi.name, oi.quantity
+                FROM order_items oi
+                JOIN menu_items mi ON oi.item_id = mi.id
+                WHERE oi.order_id = :oid
+            )");
+            items.bindValue(":oid", orderId);
+            items.exec();
+            while (items.next()) {
+                QJsonObject item;
+                item["item_id"] = items.value("item_id").toInt();
+                item["name"] = items.value("name").toString();
+                item["quantity"] = items.value("quantity").toInt();
+                itemArray.append(item);
+            }
+
+            QJsonObject orderObj;
+            orderObj["order_id"] = orderId;
+            orderObj["customer_id"] = customerId;
+            orderObj["status"] = status;
+            orderObj["items"] = itemArray;
+
+            ordersArray.append(orderObj);
+        }
+
+        response["status"] = "success";
+        response["orders"] = ordersArray;
+    } else {
+        response["status"] = "error";
+        response["message"] = "Failed to fetch orders";
+    }
+
+    client->write(QJsonDocument(response).toJson());
+}
+
+void Server::handleAddMenuItem(const QJsonObject& json, QTcpSocket* client) {
+    int ownerId = clientUserIds.value(client->socketDescriptor(), -1);
+    QString name = json["name"].toString();
+    double price = json["price"].toDouble();
+
+    QJsonObject response;
+    if (ownerId == -1 || name.isEmpty() || price <= 0) {
+        response["status"] = "error";
+        response["message"] = "Invalid data";
+        client->write(QJsonDocument(response).toJson());
+        return;
+    }
+
+    QSqlQuery restQuery(Database::instance().getConnection());
+    restQuery.prepare("SELECT id FROM restaurants WHERE owner_id = :oid AND status = 'approved'");
+    restQuery.bindValue(":oid", ownerId);
+    if (!restQuery.exec() || !restQuery.next()) {
+        response["status"] = "error";
+        response["message"] = "Restaurant not found or not approved";
+        client->write(QJsonDocument(response).toJson());
+        return;
+    }
+
+    int restId = restQuery.value("id").toInt();
+
+    QSqlQuery add(Database::instance().getConnection());
+    add.prepare("INSERT INTO menu_items (restaurant_id, name, price) VALUES (:rid, :name, :price)");
+    add.bindValue(":rid", restId);
+    add.bindValue(":name", name);
+    add.bindValue(":price", price);
+
+    if (add.exec()) {
+        response["status"] = "success";
+        response["message"] = "Item added";
+    } else {
+        response["status"] = "error";
+        response["message"] = "Insert failed";
     }
 
     client->write(QJsonDocument(response).toJson());
