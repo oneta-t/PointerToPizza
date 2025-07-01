@@ -29,7 +29,7 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>250</height>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -53,6 +53,13 @@
     <widget class="QPushButton" name="updateStatusButton">
      <property name="text">
       <string>به‌روزرسانی وضعیت</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="viewHistoryButton">
+     <property name="text">
+      <string>نمایش تاریخچه</string>
      </property>
     </widget>
    </item>
