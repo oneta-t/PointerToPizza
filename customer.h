@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "user.h"
 #include "cart.h"
+#include "userinformationpage.h"
+class UserInformationPage;
 
 namespace Ui {
 class Customer;
@@ -19,8 +21,12 @@ public:
     int getId() const;
     ~Customer();
 
+private slots:
+    void on_UserInfButton_clicked();
+
 private:
     Ui::Customer *ui;
+    UserInformationPage *InfPage;
     static int NextIdC;
     int IdC;
     Cart *cart;

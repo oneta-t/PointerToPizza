@@ -22,7 +22,8 @@ SOURCES += \
     restaurantregistration.cpp \
     signin.cpp \
     signup.cpp \
-    user.cpp
+    user.cpp \
+    userinformationpage.cpp
 
 HEADERS += \
     cart.h \
@@ -37,7 +38,8 @@ HEADERS += \
     restaurantregistration.h \
     signin.h \
     signup.h \
-    user.h
+    user.h \
+    userinformationpage.h
 
 FORMS += \
     cart.ui \
@@ -50,7 +52,8 @@ FORMS += \
     restaurantmanager.ui \
     restaurantregistration.ui \
     signin.ui \
-    signup.ui
+    signup.ui \
+    userinformationpage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

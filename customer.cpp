@@ -4,6 +4,7 @@
 Customer::Customer(QWidget *parent): QWidget(parent), ui(new Ui::Customer)
 {
     ui->setupUi(this);
+    this->InfPage=new UserInformationPage (this);
 }
 
 int Customer::NextIdC=0;
@@ -17,3 +18,10 @@ Customer::~Customer()
 {
     delete ui;
 }
+
+void Customer::on_UserInfButton_clicked()
+{
+    this->hide();
+    this->InfPage->show();
+}
+
