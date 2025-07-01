@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+/*<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>RestaurantManager</class>
  <widget class="QWidget" name="RestaurantManager">
@@ -17,3 +17,51 @@
  <resources/>
  <connections/>
 </ui>
+*/
+//--------------------------------new----------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RestaurantManager</class>
+ <widget class="QWidget" name="RestaurantManager">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>250</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>پنل مدیر رستوران</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QListView" name="listViewRestaurants"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="AddRestaurant">
+     <property name="text">
+      <string>افزودن رستوران</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="orderList"/> <!-- لیست سفارش‌ها -->
+   </item>
+   <item>
+    <widget class="QPushButton" name="updateStatusButton">
+     <property name="text">
+      <string>به‌روزرسانی وضعیت</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+
+
+
+
