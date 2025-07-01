@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>757</width>
-    <height>544</height>
+    <width>717</width>
+    <height>465</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="FoodName">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>20</y>
-     <width>111</width>
-     <height>71</height>
+     <x>510</x>
+     <y>120</y>
+     <width>181</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="font">
@@ -28,119 +28,79 @@
     </font>
    </property>
    <property name="text">
-    <string>ایجاد غذا</string>
+    <string>Food name</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="ingredients">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>100</y>
-     <width>71</width>
-     <height>51</height>
+     <x>40</x>
+     <y>220</y>
+     <width>631</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <pointsize>17</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>نام  :</string>
+    <string>Ingredients</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="name">
+  <widget class="QLabel" name="FoodName_2">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>110</y>
-     <width>381</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>180</y>
-     <width>61</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>نوع :</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="name_2">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>190</y>
-     <width>381</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
-     <y>340</y>
-     <width>81</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>ترکیبات :</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="name_3">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
+     <x>550</x>
      <y>350</y>
-     <width>381</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>260</y>
-     <width>71</width>
-     <height>51</height>
+     <width>101</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <pointsize>17</pointsize>
     </font>
    </property>
    <property name="text">
     <string>قیمت :</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="name_4">
+  <widget class="QLabel" name="price">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>270</y>
-     <width>381</width>
-     <height>41</height>
+     <x>330</x>
+     <y>340</y>
+     <width>181</width>
+     <height>91</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>17</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Price</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="photo">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>40</y>
+     <width>351</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>17</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>احتمالا ی چیزی برای عکس غذا </string>
    </property>
   </widget>
  </widget>
