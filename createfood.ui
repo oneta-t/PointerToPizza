@@ -57,7 +57,7 @@ color: rgb(0, 0, 0);</string>
     <string>بازگشت</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="name">
+  <widget class="QLineEdit" name="nameLine">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -85,7 +85,7 @@ color: rgb(0, 0, 0);</string>
     <string>نوع :</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="name_4">
+  <widget class="QLineEdit" name="priceLine">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -95,7 +95,7 @@ color: rgb(0, 0, 0);</string>
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="name_2">
+  <widget class="QLineEdit" name="typeLine">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -159,7 +159,7 @@ color: rgb(0, 0, 0);</string>
     <string>ترکیبات :</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="name_3">
+  <widget class="QLineEdit" name="ingredientLine">
    <property name="geometry">
     <rect>
      <x>60</x>

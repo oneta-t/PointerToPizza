@@ -4,6 +4,7 @@
 RestaurantF::RestaurantF(QWidget *parent): QWidget(parent), ui(new Ui::RestaurantF)
 {
     ui->setupUi(this);
+    this->createF = new CreateFood(this);
 }
 
 RestaurantF::~RestaurantF()
@@ -33,3 +34,10 @@ QString RestaurantF::getStartTime() const { return StartTime; }
 QString RestaurantF::getEndTime() const { return EndTime; }
 
 MenuF* RestaurantF::getMenuF() const { return menuF; }
+
+void RestaurantF::on_addMenu_clicked()
+{
+    this->hide();
+    this->createF->show();
+}
+

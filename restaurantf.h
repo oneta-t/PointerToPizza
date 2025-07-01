@@ -5,6 +5,9 @@
 #include <QList>
 #include <QTime>
 #include "menuf.h"
+#include "createfood.h"
+
+class CreateFood ;
 
 namespace Ui {
 class RestaurantF;
@@ -25,8 +28,12 @@ public:
     QString getEndTime() const ;
     MenuF* getMenuF() const;
 
+private slots:
+    void on_addMenu_clicked();
+
 private:
     Ui::RestaurantF *ui;
+    CreateFood *createF;
     static int NextIdR;
     int IdR;
     QString Name;
