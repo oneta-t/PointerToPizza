@@ -35,7 +35,6 @@ void RestaurantRegistration::on_pushButtonOK_clicked()
 
 }
 
-
 void RestaurantRegistration::on_pushButtonBack_clicked()
 {
     this ->hide();

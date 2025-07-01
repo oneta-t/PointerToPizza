@@ -6,13 +6,35 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>886</width>
-    <height>594</height>
+    <width>1000</width>
+    <height>663</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>201</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(179, 93, 255);</string>
+   </property>
+   <property name="text">
+    <string>ثبت سفارش</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
