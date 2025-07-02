@@ -184,9 +184,11 @@ void Server::handleLogin(const QJsonObject& json, QTcpSocket* client) {
 void Server::handleAddRestaurant(const QJsonObject& json, QTcpSocket* client) {
     int ownerId = clientUserIds.value(client->socketDescriptor(), -1);
     QString name = json["name"].toString();
+    QString address = json["address"].toString();
+
 
     QJsonObject response;
-    if (ownerId == -1 || name.isEmpty()) {
+    if (ownerId == -1 || name.isEmpty(), address.isEmpty()) {
         response["status"] = "error";
         response["message"] = "Invalid data";
         client->write(QJsonDocument(response).toJson());
@@ -206,7 +208,7 @@ void Server::handleAddRestaurant(const QJsonObject& json, QTcpSocket* client) {
         return;
     }
 
-    if (restaurantRepo.addRestaurant(ownerId, name)) {
+    if (restaurantRepo.addRestaurant(ownerId, name, address)) {
         response["status"] = "success";
         response["message"] = "Restaurant registered successfully, awaiting approval";
     } else {
@@ -508,9 +510,11 @@ void Server::handleAddMenuItem(const QJsonObject& json, QTcpSocket* client) {
     int ownerId = clientUserIds.value(client->socketDescriptor(), -1);
     QString name = json["name"].toString();
     double price = json["price"].toDouble();
+    QString type = json["type"].toString();
 
     QJsonObject response;
-    if (ownerId == -1 || name.isEmpty() || price <= 0) {
+    QRegularExpression validType("^(main_course|dessert|beverage)$");
+    if (ownerId == -1 || name.isEmpty() || price <= 0 || !validType.match(type).hasMatch()) {
         response["status"] = "error";
         response["message"] = "Invalid data";
         client->write(QJsonDocument(response).toJson());
@@ -530,7 +534,7 @@ void Server::handleAddMenuItem(const QJsonObject& json, QTcpSocket* client) {
     }
 
     int restId = restQuery.value("id").toInt();
-    if (menuRepo.addMenuItem(restId, name, price)) {
+    if (menuRepo.addMenuItem(restId, name, price, type)) {
         response["status"] = "success";
         response["message"] = "Menu item added successfully";
     } else {
@@ -548,8 +552,10 @@ void Server::handleEditMenuItem(const QJsonObject& json, QTcpSocket* client) {
     int itemId = json["item_id"].toInt();
     QString name = json["name"].toString();
     double price = json["price"].toDouble();
+    QString type = json["type"].toString();
 
     QJsonObject response;
+    QRegularExpression validType("^(main_course|dessert|beverage)$");
     if (ownerId == -1 || name.isEmpty() || price <= 0 || itemId <= 0) {
         response["status"] = "error";
         response["message"] = "Invalid data";
@@ -570,7 +576,7 @@ void Server::handleEditMenuItem(const QJsonObject& json, QTcpSocket* client) {
     }
 
     int restId = restQuery.value("id").toInt();
-    if (menuRepo.editMenuItem(itemId, restId, name, price)) {
+    if (menuRepo.editMenuItem(itemId, restId, name, price, type)) {
         response["status"] = "success";
         response["message"] = "Menu item updated successfully";
     } else {
