@@ -6,13 +6,20 @@
 #include <QDebug>
 
 // اضافه کردن آیتم جدید به منو
-bool MenuRepository::addMenuItem(int restaurantId, const QString& name, double price) {
+bool MenuRepository::addMenuItem(int restaurantId, const QString& name, double price, const QString& type) {
     QSqlQuery query(Database::instance().getConnection());
 
-    query.prepare("INSERT INTO menu_items (restaurant_id, name, price) VALUES (:rid, :name, :price)");
+    QRegularExpression validType("^(main_course|dessert|beverage)$");
+    if (!validType.match(type).hasMatch()) {
+        qWarning() <<"Invalid menu item type:"<< type;
+        return false;
+    }
+
+    query.prepare("INSERT INTO menu_items (restaurant_id, name, price, type) VALUES (:rid, :name, :price, :type)");
     query.bindValue(":rid", restaurantId);
     query.bindValue(":name", name);
     query.bindValue(":price", price);
+    query.bindValue(":type", type);
 
     if (!query.exec()) {
         qWarning() << "Failed to add menu item:" << query.lastError().text();
@@ -22,12 +29,19 @@ bool MenuRepository::addMenuItem(int restaurantId, const QString& name, double p
 }
 
 // ویرایش آیتم منو
-bool MenuRepository::editMenuItem(int itemId, int restaurantId, const QString& name, double price) {
+bool MenuRepository::editMenuItem(int itemId, int restaurantId, const QString& name, double price, const QString& type) {
     QSqlQuery query(Database::instance().getConnection());
+
+    QRegularExpression validType("^(main_course|dessert|beverage)$");
+    if (!validType.match(type).hasMatch()) {
+        qWarning() <<"Invalid menu item type:"<< type;
+        return false;
+    }
 
     query.prepare("UPDATE menu_items SET name = :name, price = :price WHERE id = :item_id AND restaurant_id = :rid");
     query.bindValue(":name", name);
     query.bindValue(":price", price);
+    query.bindValue(":type", type);
     query.bindValue(":item_id", itemId);
     query.bindValue(":rid", restaurantId);
 
@@ -58,7 +72,7 @@ QJsonArray MenuRepository::getMenu(int restaurantId) {
     QSqlQuery query(Database::instance().getConnection());
     QJsonArray menuArray;
 
-    query.prepare("SELECT id, name, price FROM menu_items WHERE restaurant_id = :rid");
+    query.prepare("SELECT id, name, price, type FROM menu_items WHERE restaurant_id = :rid");
     query.bindValue(":rid", restaurantId);
 
     if (query.exec()) {
@@ -67,6 +81,7 @@ QJsonArray MenuRepository::getMenu(int restaurantId) {
             item["item_id"] = query.value("id").toInt();
             item["name"] = query.value("name").toString();
             item["price"] = query.value("price").toDouble();
+            item["type"] = query.value("type").toDouble();
             menuArray.append(item);
         }
     } else {
