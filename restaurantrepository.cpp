@@ -6,12 +6,13 @@
 #include <QDebug>
 
 // اضافه کردن رستوران جدید
-bool RestaurantRepository::addRestaurant(int ownerId, const QString& name) {
+bool RestaurantRepository::addRestaurant(int ownerId, const QString& name, const QString& address) {
     QSqlQuery query(Database::instance().getConnection());
 
-    query.prepare("INSERT INTO restaurants (name, owner_id, status) VALUES (:name, :owner_id, 'pending')");
+    query.prepare("INSERT INTO restaurants (name, owner_id, address, status) VALUES (:name, :owner_id, :address, 'pending')");
     query.bindValue(":name", name);
     query.bindValue(":owner_id", ownerId);
+    query.bindValue(":address", address);
 
     if (!query.exec()) {
         qWarning() << "Failed to add restaurant:" << query.lastError().text();
@@ -25,11 +26,12 @@ QJsonArray RestaurantRepository::getApprovedRestaurants() {
     QSqlQuery query(Database::instance().getConnection());
     QJsonArray restaurantArray;
 
-    if (query.exec("SELECT id, name FROM restaurants WHERE status = 'approved'")) {
+    if (query.exec("SELECT id, name, address FROM restaurants WHERE status = 'approved'")) {
         while (query.next()) {
             QJsonObject rest;
             rest["id"] = query.value("id").toInt();
             rest["name"] = query.value("name").toString();
+            rest["address"] = query.value("address").toString();
             restaurantArray.append(rest);
         }
     } else {
