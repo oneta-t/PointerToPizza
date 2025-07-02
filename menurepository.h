@@ -8,10 +8,10 @@
 class MenuRepository {
 public:
     // اضافه کردن آیتم جدید به منو
-    bool addMenuItem(int restaurantId, const QString& name, double price);
+    bool addMenuItem(int restaurantId, const QString& name, double price, const QString& type);
 
     // ویرایش آیتم منو
-    bool editMenuItem(int itemId, int restaurantId, const QString& name, double price);
+    bool editMenuItem(int itemId, int restaurantId, const QString& name, double price, const QString& type);
 
     // حذف آیتم منو
     bool deleteMenuItem(int itemId, int restaurantId);
