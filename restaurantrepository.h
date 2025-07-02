@@ -8,7 +8,7 @@
 class RestaurantRepository {
 public:
     // اضافه کردن رستوران جدید
-    bool addRestaurant(int ownerId, const QString& name);
+    bool addRestaurant(int ownerId, const QString& name, const QString& address);
 
     // گرفتن لیست رستوران‌های تأییدشده
     QJsonArray getApprovedRestaurants();
