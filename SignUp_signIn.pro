@@ -21,6 +21,7 @@ SOURCES += \
     customer.cpp \
     restaurantmodel.cpp \
     restaurantregistration.cpp \
+    restaurantrepository.cpp \
     signin.cpp \
     signup.cpp \
     user.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     customer.h \
     restaurantmodel.h \
     restaurantregistration.h \
+    restaurantrepository.h \
     signin.h \
     signup.h \
     user.h \

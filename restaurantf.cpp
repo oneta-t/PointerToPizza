@@ -1,43 +1,57 @@
 #include "restaurantf.h"
 #include "ui_restaurantf.h"
+#include <QLabel>
 
-RestaurantF::RestaurantF(QWidget *parent): QWidget(parent), ui(new Ui::RestaurantF)
+RestaurantF::RestaurantF(int restaurantId, const QString& name, const QString& location,const QString& startTime, const QString& endTime, QWidget *parent)
+    : QWidget(parent), restaurantId(restaurantId), name(name), location(location),
+    startTime(startTime), endTime(endTime), menuF(nullptr), createF(new CreateFood(this))
 {
-    ui->setupUi(this);
-    this->createF = new CreateFood(this);
+    setupUi();
 }
 
 RestaurantF::~RestaurantF()
 {
-    delete ui;
+    delete menuF;
 }
 
-int RestaurantF::NextIdR=0;
+int RestaurantF::getRestaurantId() const { return restaurantId; }
 
-RestaurantF::RestaurantF(QString name,QString location,QString start,QString end)
-{
-    IdR=NextIdR++;
-    Name=name;
-    Location=location;
-    StartTime=start;
-    EndTime=end;
-}
+QString RestaurantF::getName() const { return name; }
 
-int RestaurantF::getIdR() const { return IdR; }
+QString RestaurantF::getLocation() const { return location; }
 
-QString RestaurantF::getName() const { return Name; }
+QString RestaurantF::getStartTime() const { return startTime; }
 
-QString RestaurantF::getLocation() const { return Location; }
-
-QString RestaurantF::getStartTime() const { return StartTime; }
-
-QString RestaurantF::getEndTime() const { return EndTime; }
+QString RestaurantF::getEndTime() const { return endTime; }
 
 MenuF* RestaurantF::getMenuF() const { return menuF; }
 
-void RestaurantF::on_addMenu_clicked()
+void RestaurantF::setupUi()
 {
+    // ایجاد ویجت‌ها
+    QLabel* nameLabel = new QLabel("نام رستوران: " + name, this);
+    QLabel* locationLabel = new QLabel("آدرس: " + location, this);
+    QLabel* hoursLabel = new QLabel("ساعات کاری: " + startTime + " تا " + endTime, this);
+    addMenuButton = new QPushButton("افزودن منو", this);
+    addMenuButton->setObjectName("AddMenuButton");
+
+    // تنظیم چیدمان عمودی
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->addWidget(nameLabel);
+    layout->addWidget(locationLabel);
+    layout->addWidget(hoursLabel);
+    layout->addWidget(addMenuButton);
+    layout->addStretch();
+
+    setLayout(layout);
+
+    // اتصال سیگنال به اسلات
+    connect(addMenuButton, &QPushButton::clicked, this, &RestaurantF::onAddMenuClicked);
+}
+
+void RestaurantF::onAddMenuClicked()
+{
+    createF->show();
     this->hide();
-    this->createF->show();
 }
 

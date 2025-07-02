@@ -2,37 +2,33 @@
 #define RESTAURANTMANAGER_H
 
 #include <QWidget>
-#include <QList>
-#include "user.h"
-#include "restaurantf.h"
-#include "restaurantregistration.h"
-#include "restaurantmodel.h"
-class RestaurantRegistration;
+#include <QPushButton>
+#include <QVBoxLayout>
+#include "User.h"
+#include "RestaurantModel.h"
+#include "RestaurantRegistration.h"
 
-namespace Ui {
-class RestaurantManager;
-}
-
-class RestaurantManager : public QWidget ,public User
+class RestaurantManager : public QWidget, public User
 {
     Q_OBJECT
 
 public:
-    explicit RestaurantManager(QWidget *parent = nullptr);
-    RestaurantManager(QString name,QString family,QString passw,QString username,QString phone,QString role);
-    int getId() const;
+    explicit RestaurantManager(int userId, QWidget *parent = nullptr);
+    RestaurantManager(int userId, const QString& name, const QString& family, const QString& passw,
+                      const QString& username, const QString& phone, const QString& role);
+    int getUserId() const;
     ~RestaurantManager();
-    RestaurantModel *restaurantModel; // مدل رستوران‌ها
 
 private slots:
-    void on_AddRestaurant_clicked();
+    void onAddRestaurantClicked();
 
 private:
-    Ui::RestaurantManager *ui;
-    static int NextIdRM;
-    int IdRM;
-    RestaurantRegistration * Registration;
+    void setupUi();
 
+    int userId;
+    QPushButton* addRestaurantButton;
+    RestaurantModel* restaurantModel;
+    RestaurantRegistration* registration;
 };
 
 #endif // RESTAURANTMANAGER_H

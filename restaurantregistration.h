@@ -6,29 +6,36 @@
 #include "restaurantf.h"
 #include "restaurantmanager.h"
 #include "restaurantmodel.h"
-
-class RestaurantManager;
-
-namespace Ui {
-class RestaurantRegistration;
-}
+#include <QWidget>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QVBoxLayout>
+#include <QMessageBox>
+#include "RestaurantManager.h"
+#include "RestaurantRepository.h"
 
 class RestaurantRegistration : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit RestaurantRegistration(RestaurantManager * RManager,QWidget *parent = nullptr);
+    explicit RestaurantRegistration(RestaurantManager* rManager, QWidget *parent = nullptr);
     ~RestaurantRegistration();
 
 private slots:
-    void on_pushButtonOK_clicked();
-
-    void on_pushButtonBack_clicked();
+    void onOkButtonClicked();
+    void onBackButtonClicked();
 
 private:
-    Ui::RestaurantRegistration *ui;
-    RestaurantManager * RManager;
+    void setupUi();
+
+    RestaurantManager* rManager;
+    QLineEdit* nameInput;
+    QLineEdit* locationInput;
+    QLineEdit* startTimeInput;
+    QLineEdit* endTimeInput;
+    QPushButton* okButton;
+    QPushButton* backButton;
 };
 
 #endif // RESTAURANTREGISTRATION_H

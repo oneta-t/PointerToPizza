@@ -1,27 +1,51 @@
-#include "customer.h"
-#include "ui_customer.h"
+#include "Customer.h"
+#include <QLabel>
 
-Customer::Customer(QWidget *parent): QWidget(parent), ui(new Ui::Customer)
+Customer::Customer(int userId, QWidget *parent)
+    : QWidget(parent), User(), userId(userId), infPage(nullptr), cart(new Cart(this))
 {
-    ui->setupUi(this);
-    this->InfPage=new UserInformationPage (this);
+    setupUi();
 }
 
-int Customer::NextIdC=0;
-
-Customer::Customer(QString name,QString family,QString passw,QString username,QString phone,QString role):User(name,family,passw,username,phone,role)
+Customer::Customer(int userId, const QString& name, const QString& family, const QString& passw,
+                   const QString& username, const QString& phone, const QString& role)
+    : QWidget(nullptr), User(name, family, passw, username, phone, role),
+    userId(userId), infPage(nullptr), cart(new Cart(this))
 {
-    IdC=NextIdC++;
+    setupUi();
 }
 
 Customer::~Customer()
 {
-    delete ui;
+    // cart و infPage توسط Qt مدیریت می‌شوند (والد دارند)
 }
 
-void Customer::on_UserInfButton_clicked()
+int Customer::getUserId() const
 {
-    this->hide();
-    this->InfPage->show();
+    return userId;
 }
 
+void Customer::setupUi()
+{
+    // ایجاد ویجت‌ها
+    userInfoButton = new QPushButton("نمایش اطلاعات کاربر", this);
+    userInfoButton->setObjectName("UserInfButton");
+
+    // تنظیم چیدمان عمودی
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->addWidget(new QLabel("صفحه مشتری", this));
+    layout->addWidget(userInfoButton);
+    layout->addStretch();
+
+    setLayout(layout);
+
+    // اتصال سیگنال به اسلات
+    connect(userInfoButton, &QPushButton::clicked, this, &Customer::onUserInfoButtonClicked);
+}
+
+void Customer::onUserInfoButtonClicked()
+{
+    if (!infPage)
+        infPage = new UserInformationPage(this);
+    infPage->show();
+}

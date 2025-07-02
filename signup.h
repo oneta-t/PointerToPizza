@@ -19,9 +19,8 @@ class SignUP : public QWidget
     Q_OBJECT
 
 public:
-    explicit SignUP(MainWindow* mainW,QWidget *parent = nullptr);
+    explicit SignUP(MainWindow* mainW, QWidget *parent = nullptr);
     ~SignUP();
-
 
 private slots:
     void on_pushButtoYes_clicked();

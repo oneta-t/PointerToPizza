@@ -1,22 +1,25 @@
-#include "signin.h"
-#include "ui_signin.h"
+#include "SignIn.h"
+#include "ui_SignIn.h"
+#include <QMessageBox>
+#include "UserRepository.h"
 
-SignIn::SignIn(MainWindow* mainW,QWidget *parent): QWidget(parent), ui(new Ui::SignIn),mainW(mainW)
+SignIn::SignIn(MainWindow* mainW, QWidget *parent)
+    : QWidget(parent), ui(new Ui::SignIn), mainW(mainW), customerP(nullptr), restaurantM(nullptr)
 {
     ui->setupUi(this);
-    this->restaurantM = new RestaurantManager;
-    this->customerP = new Customer;
 }
 
 SignIn::~SignIn()
 {
     delete ui;
+    delete customerP;
+    delete restaurantM;
 }
 
 void SignIn::on_signInButto_clicked()
 {
     QString username = ui->lineEdit_username->text().trimmed();
-    QString password1 = ui->lineEdit_pass->text().trimmed();
+    QString password = ui->lineEdit_pass->text().trimmed();
 
     UserRepository userRepo;
     int userId;
@@ -28,13 +31,15 @@ void SignIn::on_signInButto_clicked()
 
         if (role == "مشتری")
         {
-            // ایجاد و نمایش صفحه مشتری
-            this->customerP->show();
+            if (!customerP)
+                customerP = new Customer(userId, this);
+            customerP->show();
         }
         else if (role == "مدیر رستوران")
         {
-            // ایجاد و نمایش صفحه مدیر رستوران
-            this->restaurantM->show();
+            if (!restaurantM)
+                restaurantM = new RestaurantManager(userId, this);
+            restaurantM->show();
         }
         else
         {
@@ -46,6 +51,4 @@ void SignIn::on_signInButto_clicked()
     {
         QMessageBox::warning(this, "خطا", "نام کاربری یا رمز عبور اشتباه است.");
     }
-
 }
-

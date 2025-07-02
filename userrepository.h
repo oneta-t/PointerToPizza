@@ -5,14 +5,17 @@
 
 class UserRepository {
 public:
+    UserRepository();
     // ثبت کاربر جدید در سیستم
-    bool addUser(const QString& username, const QString& password, const QString& role = "customer");
+    bool addUser(const QString& username, const QString& password, const QString& role,const QString& name, const QString& family, const QString& phone);
 
     //بررسی وجود کاربر با نام کاربری داده شده
     bool userExists(const QString& username);
 
     // اعتبار سنجی ورود کاربر و دریافت نقش و شناسه کاربر
     bool validateLogin(const QString& username, const QString& password, int& userId, QString& role);
+
+    User getUserInfo(int userId);
 };
 
 #endif // USERREPOSITORY_H

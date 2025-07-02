@@ -2,34 +2,33 @@
 #define CUSTOMER_H
 
 #include <QWidget>
-#include "user.h"
-#include "cart.h"
-#include "userinformationpage.h"
-class UserInformationPage;
-
-namespace Ui {
-class Customer;
-}
+#include <QPushButton>
+#include <QVBoxLayout>
+#include "User.h"
+#include "UserInformationPage.h"
+#include "Cart.h"
 
 class Customer : public QWidget, public User
 {
     Q_OBJECT
 
 public:
-    explicit Customer(QWidget *parent = nullptr);
-    Customer(QString name,QString family,QString passw,QString username,QString phone,QString role);
-    int getId() const;
+    explicit Customer(int userId, QWidget *parent = nullptr);
+    Customer(int userId, const QString& name, const QString& family, const QString& passw,
+             const QString& username, const QString& phone, const QString& role);
+    int getUserId() const;
     ~Customer();
 
 private slots:
-    void on_UserInfButton_clicked();
+    void onUserInfoButtonClicked();
 
 private:
-    Ui::Customer *ui;
-    UserInformationPage *InfPage;
-    static int NextIdC;
-    int IdC;
-    Cart *cart;
+    void setupUi();
+
+    int userId;
+    QPushButton* userInfoButton;
+    UserInformationPage* infPage;
+    Cart* cart;
 };
 
 #endif // CUSTOMER_H
