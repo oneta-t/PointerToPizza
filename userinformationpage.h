@@ -18,6 +18,9 @@ public:
     explicit UserInformationPage(Customer *CustomerPage,QWidget *parent = nullptr);
     ~UserInformationPage();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::UserInformationPage *ui;
     Customer * CustomerPage;
