@@ -15,11 +15,11 @@ bool UserRepository::addUser(const QString& username, const QString& password, c
 
     query.prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
     query.bindValue(":username", username);
-    query.bindValue(":password", password);
+    query.bindValue(":password", hashedPassword); // استفاده از رمز هش‌شده
     query.bindValue(":role", role);
 
     if (!query.exec()) {
-        qWarning() << "Add user failed:" << query.lastError().text();
+        qWarning() << "Failed to add user:" << query.lastError().text();
         return false;
     }
 
@@ -34,7 +34,7 @@ bool UserRepository::userExists(const QString& username) {
     query.bindValue(":username", username);
 
     if (!query.exec()) {
-        qWarning() << "Add user failed:" << query.lastError().text();
+        qWarning() << "Failed to check user existence:" << query.lastError().text();
         return false;
     }
 
@@ -49,15 +49,15 @@ bool UserRepository::userExists(const QString& username) {
 bool UserRepository::validateLogin(const QString& username, const QString& password, int& userId, QString& role) {
     QSqlQuery query(Database::instance().getConnection());
 
+    // هش کردن رمز عبور با الگوریتم SHA256
     QString hashedPassword = QString(QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256).toHex());
 
-    // هش کردن رمز عبور برای مقایسه با مقدار ذخیره شده
-    query.prepare("SELECT id, role FROM users WHERE username = :username AND password = :password");
+    query.prepare("SELECT id, role FROM users WHERE username = :username AND password = :password AND blocked = 0");
     query.bindValue(":username", username);
-    query.bindValue(":password", password);
+    query.bindValue(":password", hashedPassword);
 
     if (!query.exec()) {
-        qWarning() << "Login failed:" << query.lastError().text();
+        qWarning() << "Failed to validate login:" << query.lastError().text();
         return false;
     }
 
