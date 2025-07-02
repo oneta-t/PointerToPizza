@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "restaurantf.h"
+#include "QMessageBox"
 
 class RestaurantF;
 

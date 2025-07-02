@@ -6,6 +6,8 @@
 #include "user.h"
 #include "customer.h"
 #include "restaurantmanager.h"
+#include "userrepository.h"
+
 class MainWindow;
 
 namespace Ui {

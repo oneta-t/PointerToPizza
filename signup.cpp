@@ -60,17 +60,21 @@ void SignUP::on_pushButtoYes_clicked()
     }
 
     if (role == "مدیر رستوران") {
-        if (userRepo.userExists(username)) {
+        if (userRepo.userExists(username))
+        {
             QMessageBox::warning(this, "خطا", "نام کاربری قبلاً وجود دارد.");
             return;
         }
 
         // اضافه کردن مدیر رستوران به پایگاه داده
-        if (userRepo.addUser(username, password1, "مدیر رستوران")) {
+        if (userRepo.addUser(username, password1, "مدیر رستوران"))
+        {
             QMessageBox::information(this, "ثبت‌نام موفق", "ثبت‌نام با موفقیت انجام شد!");
             this->hide();
             mainW->show();
-        } else {
+        }
+        else
+        {
             QMessageBox::warning(this, "خطا", "ثبت‌نام ناموفق بود. لطفاً دوباره امتحان کنید.");
         }
     }

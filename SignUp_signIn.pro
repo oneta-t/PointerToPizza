@@ -1,5 +1,5 @@
 QT       += core gui
-
+QT       += core network sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     cart.cpp \
     createfood.cpp \
+    database.cpp \
     fooditeam.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -23,11 +24,13 @@ SOURCES += \
     signin.cpp \
     signup.cpp \
     user.cpp \
-    userinformationpage.cpp
+    userinformationpage.cpp \
+    userrepository.cpp
 
 HEADERS += \
     cart.h \
     createfood.h \
+    database.h \
     fooditeam.h \
     mainwindow.h \
     menuf.h \
@@ -39,7 +42,8 @@ HEADERS += \
     signin.h \
     signup.h \
     user.h \
-    userinformationpage.h
+    userinformationpage.h \
+    userrepository.h
 
 FORMS += \
     cart.ui \

@@ -4,6 +4,8 @@
 #include <QWidget>
 #include "mainwindow.h"
 #include "RestaurantManager.h"
+#include "userrepository.h"
+#include "customer.h"
 
 class MainWindow;
 class RestaurantManager;
@@ -27,6 +29,7 @@ private:
     Ui::SignIn *ui;
     MainWindow *mainW;
     RestaurantManager * restaurantM;
+    Customer *customerP;
 };
 
 #endif // SIGNIN_H
