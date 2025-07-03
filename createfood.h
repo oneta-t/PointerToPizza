@@ -1,32 +1,43 @@
 #ifndef CREATEFOOD_H
 #define CREATEFOOD_H
 
-#include <QWidget>
 #include "restaurantf.h"
-#include "QMessageBox"
+#include <QWidget>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QVBoxLayout>
+#include <QMessageBox>
+#include "restaurantF.h"
+#include "menuRepository.h"
 
-class RestaurantF;
-
-namespace Ui {
-class CreateFood;
-}
-
+// کلاس فرم افزودن غذای جدید
 class CreateFood : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit CreateFood(RestaurantF * restaurant,QWidget *parent = nullptr);
+    // سازنده با اشاره‌گر به رستوران
+    explicit CreateFood(RestaurantF* restaurant, QWidget *parent = nullptr);
+    // دestructor
     ~CreateFood();
 
 private slots:
-    void on_pushButtonOK_clicked();
-
-    void on_pushButtonBack_clicked();
+    // تأیید و ذخیره غذا
+    void onOkButtonClicked();
+    // بازگشت به صفحه رستوران
+    void onBackButtonClicked();
 
 private:
-    Ui::CreateFood *ui;
-    RestaurantF * restaurant;
+    // تنظیم رابط کاربری
+    void setupUi();
+
+    RestaurantF* restaurant; // اشاره‌گر به رستوران
+    QLineEdit* nameInput; // فیلد نام غذا
+    QLineEdit* typeInput; // فیلد نوع غذا
+    QLineEdit* priceInput; // فیلد قیمت
+    QLineEdit* ingredientsInput; // فیلد مواد اولیه
+    QPushButton* okButton; // دکمه تأیید
+    QPushButton* backButton; // دکمه بازگشت
 };
 
 #endif // CREATEFOOD_H

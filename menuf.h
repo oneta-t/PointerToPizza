@@ -4,25 +4,29 @@
 #include <QWidget>
 #include <QList>
 #include "fooditeam.h"
-
-namespace Ui {
-class MenuF;
-}
+#include <QListWidget>
+#include <QVBoxLayout>
+#include <QPushButton>
+#include "MenuRepository.h"
 
 class MenuF : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MenuF(QWidget *parent = nullptr);
+    explicit MenuF(int restaurantId, QWidget *parent = nullptr);
     ~MenuF();
-    void addFoodItem(FoodIteam* foodItem);
-    // احتمالا بعدا ی طوری بریم که مثلا برا نمایش بیایم و طبق نوع غذا ها دسته بندی کنیم
+    void loadMenu();
 
+private slots:
+    void onAddToCartClicked(QListWidgetItem* item);
 
 private:
-    Ui::MenuF *ui;
-    QList<FoodIteam*> FoodItems;
+    void setupUi();
+
+    int restaurantId;
+    QListWidget* foodList;
+    QPushButton* backButton;
 };
 
 #endif // MENUF_H

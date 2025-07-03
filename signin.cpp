@@ -3,12 +3,14 @@
 #include <QMessageBox>
 #include "UserRepository.h"
 
+// سازنده با اشاره‌گر به MainWindow
 SignIn::SignIn(MainWindow* mainW, QWidget *parent)
     : QWidget(parent), ui(new Ui::SignIn), mainW(mainW), customerP(nullptr), restaurantM(nullptr)
 {
     ui->setupUi(this);
 }
 
+// دestructor
 SignIn::~SignIn()
 {
     delete ui;
@@ -16,6 +18,7 @@ SignIn::~SignIn()
     delete restaurantM;
 }
 
+// بررسی ورود کاربر
 void SignIn::on_signInButto_clicked()
 {
     QString username = ui->lineEdit_username->text().trimmed();
@@ -23,22 +26,25 @@ void SignIn::on_signInButto_clicked()
 
     UserRepository userRepo;
     int userId;
-    QString role;
+    QString role, name, family, phone, passwordOut;
 
-    if (userRepo.validateLogin(username, password, userId, role))
+    // اعتبارسنجی ورود
+    if (userRepo.validateLogin(username, password, userId, role, name, family, phone, passwordOut))
     {
         this->hide();
 
         if (role == "مشتری")
         {
+            // ایجاد شیء Customer با اطلاعات کامل
             if (!customerP)
-                customerP = new Customer(userId, this);
+                customerP = new Customer(userId, name, family, passwordOut, username, phone, role, this);
             customerP->show();
         }
         else if (role == "مدیر رستوران")
         {
+            // ایجاد شیء RestaurantManager با اطلاعات کامل
             if (!restaurantM)
-                restaurantM = new RestaurantManager(userId, this);
+                restaurantM = new RestaurantManager(userId, name, family, passwordOut, username, phone, role, this);
             restaurantM->show();
         }
         else

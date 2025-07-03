@@ -2,33 +2,30 @@
 #define FOODITEAM_H
 
 #include <QWidget>
-
-namespace Ui {
-class FoodIteam;
-}
+#include <QLabel>
+#include <QVBoxLayout>
 
 class FoodIteam : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit FoodIteam(QWidget *parent = nullptr);
-    FoodIteam(QString foodName,QString ingredients,QString type,float price);
+    explicit FoodIteam(int itemId, const QString& foodName, const QString& ingredients,
+                       const QString& type, float price, QWidget *parent = nullptr);
+    int getItemId() const;
     QString getFoodName() const;
-    QString getIngredients()const;
+    QString getIngredients() const;
     QString getType() const;
     float getPrice() const;
-    ~FoodIteam();
 
 private:
-    Ui::FoodIteam *ui;
-    static int NextIdF;
-    int IdF;
-    QString FoodName;
-    QString Type;
-    QString Ingredients;
-    float Price;
+    void setupUi();
 
+    int itemId;
+    QString foodName;
+    QString ingredients;
+    QString type;
+    float price;
 };
 
 #endif // FOODITEAM_H
