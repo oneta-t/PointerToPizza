@@ -32,7 +32,6 @@ private:
     QString ingredients;
     QString type;
     float price;
-    //برای سفارش هم باید باشه چیزی
 };
 
 #endif // FOODITEAM_H
