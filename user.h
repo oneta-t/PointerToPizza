@@ -13,6 +13,7 @@ public:
     QString getPhone() const;
     QString getPassword() const;
     QString getRole()const;
+    int getId()const;
 
 private:
     QString Firstname;
@@ -21,6 +22,7 @@ private:
     QString Phonenum;
     QString Password;
     QString Role;
+    int UserId;
 };
 
 #endif // USER_H

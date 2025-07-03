@@ -27,8 +27,7 @@ private slots:
 private:
     Ui::Customer *ui;
     UserInformationPage *InfPage;
-    static int NextIdC;
-    int IdC;
+    //اینجا برا سفارش میخوام یکسری چیز
     Cart *cart;
 };
 

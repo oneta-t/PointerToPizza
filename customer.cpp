@@ -7,11 +7,9 @@ Customer::Customer(QWidget *parent): QWidget(parent), ui(new Ui::Customer)
     this->InfPage=new UserInformationPage (this);
 }
 
-int Customer::NextIdC=0;
-
 Customer::Customer(QString name,QString family,QString passw,QString username,QString phone,QString role):User(name,family,passw,username,phone,role)
 {
-    IdC=NextIdC++;
+    I
 }
 
 Customer::~Customer()

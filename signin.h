@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include "mainwindow.h"
-#include "RestaurantManager.h"
+#include "restaurantManager.h"
 #include "userrepository.h"
 #include "customer.h"
 

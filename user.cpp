@@ -49,6 +49,11 @@ QString User::getRole()const
     return Role;
 }
 
+int User::getId()const
+{
+    return UserId
+}
+
 
 
 
