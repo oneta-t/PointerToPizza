@@ -7,7 +7,11 @@
 #include "cart.h"
 #include "userinformationpage.h"
 #include "menuf.h"
+<<<<<<< HEAD
 #include "order.h"
+=======
+#include "orser.h"
+>>>>>>> 3b28d5a9919a3c7f2637f5b7807c15a08c8186b3
 
 class UserInformationPage;
 

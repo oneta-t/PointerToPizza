@@ -84,3 +84,26 @@ int RestaurantRepository::getRestaurantOwnerId(int restaurantId) {
     }
     return -1;
 }
+
+//برای لود کردن رستوران
+QList<QMap<QString, QVariant>> RestaurantRepository::getAllRestaurants() {
+    QList<QMap<QString, QVariant>> restaurants;
+    QSqlQuery query(db);
+    
+    if (!query.exec("SELECT id, name, owner_id, address, status FROM restaurants")) {
+        qCritical() << "Failed to fetch restaurants:" << query.lastError().text();
+       LGPLv2.1return restaurants;
+    }
+    
+    while (query.next()) {
+        QMap<QString, QVariant> restaurant;
+        restaurant["id"] = query.value("id").toInt();
+        restaurant["name"] = query.value("name").toString();
+        restaurant["owner_id"] = query.value("owner_id").toInt();
+        restaurant["address"] = query.value("address").toString();
+        restaurant["status"] = query.value("status").toString();
+        restaurants.append(restaurant);
+    }
+    
+    return restaurants;
+}
