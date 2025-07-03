@@ -21,7 +21,7 @@ public:
     QJsonArray getMenu(int restaurantId);
 
     //برای لود کردن منو یک رستوران خاص
-    QList<QString> Database::getMenuItems(int restaurant_id);
+    QList<QString>getMenuItems(int restaurant_id);
 };
 
 #endif // MENUREPOSITORY_H
