@@ -21,6 +21,9 @@ public:
 
     // گرفتن شناسه صاحب رستوران
     int getRestaurantOwnerId(int restaurantId);
+
+    //حالت لود کردن رستوران ها
+    QList<QMap<QString, QVariant>> Database::getAllRestaurants();
 };
 
 #endif // RESTAURANTREPOSITORY_H
