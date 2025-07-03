@@ -16,11 +16,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     menuf.cpp \
+    menurepository.cpp \
+    order.cpp \
     restaurantf.cpp \
     restaurantmanager.cpp \
     customer.cpp \
     restaurantmodel.cpp \
     restaurantregistration.cpp \
+    restaurantrepository.cpp \
     signin.cpp \
     signup.cpp \
     user.cpp \
@@ -34,11 +37,14 @@ HEADERS += \
     fooditeam.h \
     mainwindow.h \
     menuf.h \
+    menurepository.h \
+    order.h \
     restaurantf.h \
     restaurantmanager.h \
     customer.h \
     restaurantmodel.h \
     restaurantregistration.h \
+    restaurantrepository.h \
     signin.h \
     signup.h \
     user.h \

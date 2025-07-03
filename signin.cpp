@@ -1,39 +1,49 @@
 #include "signin.h"
 #include "ui_signin.h"
+#include "userrepository.h"
+#include <QMessageBox>
 
-SignIn::SignIn(MainWindow* mainW,QWidget *parent): QWidget(parent), ui(new Ui::SignIn),mainW(mainW)
+// سازنده کلاس SignIn
+SignIn::SignIn(MainWindow* mainW, QWidget *parent) : QWidget(parent), ui(new Ui::SignIn), mainW(mainW)
 {
+    // راه‌اندازی رابط کاربری
     ui->setupUi(this);
-    this->restaurantM = new RestaurantManager;
-    this->customerP = new Customer;
+    this->restaurantM = nullptr;
+    this->customerP = nullptr;
 }
 
+// دستراکتور برای آزادسازی منابع
 SignIn::~SignIn()
 {
     delete ui;
+    delete restaurantM;
+    delete customerP;
 }
 
+// مدیریت کلیک روی دکمه ورود
 void SignIn::on_signInButto_clicked()
 {
+    // دریافت اطلاعات ورودی از فرم
     QString username = ui->lineEdit_username->text().trimmed();
-    QString password1 = ui->lineEdit_pass->text().trimmed();
+    QString password = ui->lineEdit_pass->text().trimmed();
 
     UserRepository userRepo;
     int userId;
     QString role;
 
+    // اعتبارسنجی ورود کاربر
     if (userRepo.validateLogin(username, password, userId, role))
     {
+        // مخفی کردن صفحه ورود
         this->hide();
-
         if (role == "مشتری")
         {
-            // ایجاد و نمایش صفحه مشتری
+            this->customerP = new Customer(userId, this);
             this->customerP->show();
         }
         else if (role == "مدیر رستوران")
         {
-            // ایجاد و نمایش صفحه مدیر رستوران
+            this->restaurantM = new RestaurantManager(userId, this);
             this->restaurantM->show();
         }
         else
@@ -46,6 +56,4 @@ void SignIn::on_signInButto_clicked()
     {
         QMessageBox::warning(this, "خطا", "نام کاربری یا رمز عبور اشتباه است.");
     }
-
 }
-

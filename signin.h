@@ -3,32 +3,33 @@
 
 #include <QWidget>
 #include "mainwindow.h"
-#include "restaurantManager.h"
+#include "restaurantmanager.h"
 #include "userrepository.h"
 #include "customer.h"
 
 class MainWindow;
-class RestaurantManager;
 
 namespace Ui {
 class SignIn;
 }
 
+// کلاس SignIn برای مدیریت صفحه ورود
 class SignIn : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SignIn(MainWindow* mainW,QWidget *parent = nullptr);
+    explicit SignIn(MainWindow* mainW, QWidget *parent = nullptr);
     ~SignIn();
 
 private slots:
+    // اسلات برای دکمه ورود
     void on_signInButto_clicked();
 
 private:
     Ui::SignIn *ui;
     MainWindow *mainW;
-    RestaurantManager * restaurantM;
+    RestaurantManager *restaurantM;
     Customer *customerP;
 };
 

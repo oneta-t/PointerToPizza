@@ -14,21 +14,24 @@ namespace Ui {
 class SignUP;
 }
 
+// کلاس SignUP برای مدیریت صفحه ثبت‌نام
 class SignUP : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit SignUP(MainWindow* mainW,QWidget *parent = nullptr);
+    // سازنده با اشاره‌گر به پنجره اصلی
+    explicit SignUP(MainWindow* mainW, QWidget *parent = nullptr);
+    // دستراکتور برای آزادسازی منابع
     ~SignUP();
 
-
 private slots:
+    // اسلات برای دکمه ثبت‌نام
     void on_pushButtoYes_clicked();
 
 private:
-    Ui::SignUP *ui;
-    MainWindow *mainW;
+    Ui::SignUP *ui; // رابط کاربری
+    MainWindow *mainW; // اشاره‌گر به پنجره اصلی
 };
 
 #endif // SIGNUP_H

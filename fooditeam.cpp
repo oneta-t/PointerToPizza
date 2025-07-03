@@ -1,25 +1,15 @@
 #include "fooditeam.h"
 #include "ui_fooditeam.h"
 
-FoodIteam::FoodIteam(QWidget *parent): QWidget(parent), ui(new Ui::FoodIteam)
-{
-    ui->setupUi(this);
-}
-
 FoodIteam::~FoodIteam()
 {
     delete ui;
 }
 
-int FoodIteam::NextIdF = 0;
-
-FoodIteam::FoodIteam(QString foodName, QString ingredients, QString type, float price)
+FoodIteam::FoodIteam(int id, int restaurantId, QString foodName, QString ingredients, QString type, float price, QWidget *parent)
+    : QWidget(parent), ui(new Ui::FoodIteam), id(id), restaurantId(restaurantId), foodName(foodName), ingredients(ingredients), type(type), price(price)
 {
-    IdF=NextIdF++;
-    FoodName=foodName;
-    Ingredients=ingredients;
-    Price=price;
-    Type=type;
+    ui->setupUi(this);
 }
 
 QString FoodIteam::getFoodName() const { return FoodName; }

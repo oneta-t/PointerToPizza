@@ -3,32 +3,36 @@
 
 #include <QWidget>
 
-namespace Ui {
-class FoodIteam;
+    namespace Ui {
+    class FoodIteam;
 }
 
+// کلاس FoodIteam برای نمایش اطلاعات غذا
 class FoodIteam : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit FoodIteam(QWidget *parent = nullptr);
-    FoodIteam(QString foodName,QString ingredients,QString type,float price);
+    // سازنده با اطلاعات غذا
+    explicit FoodIteam(int id, int restaurantId, QString foodName, QString ingredients, QString type, float price, QWidget *parent = nullptr);
+    ~FoodIteam();
+
+    int getId() const;
+    int getRestaurantId() const;
     QString getFoodName() const;
-    QString getIngredients()const;
+    QString getIngredients() const;
     QString getType() const;
     float getPrice() const;
-    ~FoodIteam();
 
 private:
     Ui::FoodIteam *ui;
-    static int NextIdF;
-    int IdF;
-    QString FoodName;
-    QString Type;
-    QString Ingredients;
-    float Price;
-
+    int id;
+    int restaurantId;
+    QString foodName;
+    QString ingredients;
+    QString type;
+    float price;
+    //برای سفارش هم باید باشه چیزی
 };
 
 #endif // FOODITEAM_H

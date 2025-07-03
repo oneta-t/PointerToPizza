@@ -2,37 +2,39 @@
 #define RESTAURANTMANAGER_H
 
 #include <QWidget>
-#include <QList>
 #include "user.h"
-#include "restaurantf.h"
 #include "restaurantregistration.h"
 #include "restaurantmodel.h"
-class RestaurantRegistration;
+
+    class RestaurantRegistration;
 
 namespace Ui {
 class RestaurantManager;
 }
 
-class RestaurantManager : public QWidget ,public User
+// کلاس RestaurantManager برای مدیریت صفحه مدیر رستوران
+class RestaurantManager : public QWidget, public User
 {
     Q_OBJECT
 
 public:
-    explicit RestaurantManager(QWidget *parent = nullptr);
-    RestaurantManager(QString name,QString family,QString passw,QString username,QString phone,QString role);
-    int getId() const;
+    // سازنده با userId برای شناسایی مدیر
+    explicit RestaurantManager(int userId, QWidget *parent = nullptr);
     ~RestaurantManager();
-    RestaurantModel *restaurantModel; // مدل رستوران‌ها
+
+    void loadRestaurants();
+
+    int getUserId() const { return userId; }
 
 private slots:
+    // اسلات برای دکمه افزودن رستوران
     void on_AddRestaurant_clicked();
 
 private:
     Ui::RestaurantManager *ui;
-    static int NextIdRM;
-    int IdRM;
-    RestaurantRegistration * Registration;
-
+    RestaurantRegistration *registration;
+    RestaurantModel *restaurantModel;
+    int userId;
 };
 
 #endif // RESTAURANTMANAGER_H

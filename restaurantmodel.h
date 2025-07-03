@@ -2,40 +2,31 @@
 #define RESTAURANTMODEL_H
 
 #include <QAbstractListModel>
-#include <QList>
 #include "restaurantf.h"
+#include "restaurantrepository.h"
 
-class RestaurantModel : public QAbstractListModel
+    // مدل برای نمایش رستوران‌ها در لیست
+    class RestaurantModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    // تعریف نام‌های نقش برای دسترسی به داده‌ها
-    enum RoleNames
-    {
-        NameRole = Qt::UserRole + 1, // نام رستوران
-        LocationRole,                 // آدرس رستوران
-        StartTimeRole,                // ساعت شروع
-        EndTimeRole                   // ساعت پایان
-    };
-
-    // سازنده مدل
     explicit RestaurantModel(QObject *parent = nullptr);
+    ~RestaurantModel();
 
-    // تابعی برای اضافه کردن رستوران به مدل
-    void addRestaurant(RestaurantF *restaurant);
-
-    // تعداد رستوران‌ها
+    // متدهای مدل
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-
-    // دریافت داده‌های رستوران بر اساس ایندکس
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
-    // تعریف نقش‌های مدل
-    QHash<int, QByteArray> roleNames() const override;
+    // اضافه کردن رستوران
+    bool addRestaurant(RestaurantF *restaurant);
+
+    // لود رستوران‌های یک صاحب
+    void loadRestaurants(int ownerId);
 
 private:
-    QList<RestaurantF*> m_restaurants; // لیست رستوران‌ها
+    QList<RestaurantF*> restaurants; // لیست رستوران‌ها
+    RestaurantRepository repo;       // مخزن برای دسترسی به دیتابیس
 };
 
 #endif // RESTAURANTMODEL_H

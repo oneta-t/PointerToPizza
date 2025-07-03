@@ -18,8 +18,7 @@ class RestaurantF : public QWidget
     Q_OBJECT
 
 public:
-    explicit RestaurantF(QWidget *parent = nullptr);
-    RestaurantF(QString name,QString location ,QString start,QString end );//شاید باید منو هم باشه اینجا
+    explicit RestaurantF(int id, int ownerId, QString name, QString address, QString startTime, QString endTime, QWidget *parent = nullptr);
     ~RestaurantF();
     int getIdR() const ;
     QString getName() const ;
@@ -27,6 +26,7 @@ public:
     QString getStartTime() const ;
     QString getEndTime() const ;
     MenuF* getMenuF() const;
+    int getOwnerId() const;
 
 private slots:
     void on_addMenu_clicked();
@@ -34,8 +34,8 @@ private slots:
 private:
     Ui::RestaurantF *ui;
     CreateFood *createF;
-    static int NextIdR;
     int IdR;
+    int ownerId;
     QString Name;
     QString Location;
     QString StartTime;
