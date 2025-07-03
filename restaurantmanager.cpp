@@ -8,6 +8,7 @@
 // سازنده کلاس RestaurantManager
 RestaurantManager::RestaurantManager(int userId, QWidget *parent) : QWidget(parent), User(userId), ui(new Ui::RestaurantManager)
 {
+    restaurants=nullptr;
     // راه‌اندازی رابط کاربری
     ui->setupUi(this);
     // ایجاد صفحه ثبت رستوران
@@ -38,6 +39,7 @@ RestaurantManager::~RestaurantManager()
     delete ui;
     delete Registration;
     delete restaurantModel;
+    qDeleteAll(restaurants);
 }
 
 // مدیریت کلیک روی دکمه افزودن رستوران

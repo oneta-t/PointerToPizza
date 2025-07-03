@@ -10,8 +10,6 @@ MenuF::MenuF(int restaurantId, QWidget *parent) : QWidget(parent), ui(new Ui::Me
 {
     ui->setupUi(this);
     loadMenu(); // لود منو در ابتدا
-
-    // اتصال اسلات‌ها به دکمه‌ها
     connect(ui->pushButtonAdd, &QPushButton::clicked, this, &MenuF::on_pushButtonAdd_clicked);
     connect(ui->pushButtonEdit, &QPushButton::clicked, this, &MenuF::on_pushButtonEdit_clicked);
     connect(ui->pushButtonDelete, &QPushButton::clicked, this, &MenuF::on_pushButtonDelete_clicked);

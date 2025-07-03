@@ -2,7 +2,9 @@
 #define RESTAURANTMANAGER_H
 
 #include <QWidget>
+#include <QList>
 #include "user.h"
+#include "restaurantf.h"
 #include "restaurantregistration.h"
 #include "restaurantmodel.h"
 
@@ -35,6 +37,7 @@ private:
     RestaurantRegistration *registration;
     RestaurantModel *restaurantModel;
     int userId;
+    QList <RestaurantF*>restaurants;
 };
 
 #endif // RESTAURANTMANAGER_H

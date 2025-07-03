@@ -2,10 +2,12 @@
 #define CUSTOMER_H
 
 #include <QWidget>
+#include <QList>
 #include "user.h"
 #include "cart.h"
 #include "userinformationpage.h"
 #include "menuf.h"
+#include "order.h"
 
 class UserInformationPage;
 
@@ -32,6 +34,7 @@ private:
     Ui::Customer *ui;
     UserInformationPage *InfPage;
     Cart *cart;
+    QList <order*>ordersHistory;
     int userId;
 };
 

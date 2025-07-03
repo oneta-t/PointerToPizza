@@ -22,6 +22,7 @@ void Customer::on_UserInfButton_clicked()
 // سازنده کلاس Customer
 Customer::Customer(int userId, QWidget *parent) : QWidget(parent), User(userId), ui(new Ui::Customer)
 {
+    ordersHistory=nullptr;
     // راه‌اندازی رابط کاربری
     ui->setupUi(this);
     // ایجاد صفحه اطلاعات کاربر
@@ -51,6 +52,7 @@ Customer::~Customer()
     delete ui;
     delete InfPage;
     delete cart;
+    qDeleteAll(ordersHistory);
 }
 
 // مدیریت کلیک روی دکمه اطلاعات کاربر

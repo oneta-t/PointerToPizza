@@ -2,14 +2,12 @@
 #include "ui_createfood.h"
 #include <QMessageBox>
 
-// سازنده کلاس CreateFood
 CreateFood::CreateFood(RestaurantF *restaurant, QWidget *parent)
     : QWidget(parent), ui(new Ui::CreateFood), restaurant(restaurant)
 {
     ui->setupUi(this);
 }
 
-// دستراکتور برای آزادسازی منابع
 CreateFood::~CreateFood()
 {
     delete ui;
