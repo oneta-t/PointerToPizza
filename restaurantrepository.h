@@ -23,7 +23,7 @@ public:
     int getRestaurantOwnerId(int restaurantId);
 
     //حالت لود کردن رستوران ها
-    QList<QMap<QString, QVariant>> Database::getAllRestaurants();
+    QList<QMap<QString, QVariant>> getAllRestaurants();
 };
 
 #endif // RESTAURANTREPOSITORY_H
