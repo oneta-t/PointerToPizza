@@ -86,7 +86,7 @@ int RestaurantRepository::getRestaurantOwnerId(int restaurantId) {
 }
 
 //برای لود کردن رستوران
-QList<QMap<QString, QVariant>> Database::getAllRestaurants() {
+QList<QMap<QString, QVariant>> RestaurantRepository::getAllRestaurants() {
     QList<QMap<QString, QVariant>> restaurants;
     QSqlQuery query(db);
     
