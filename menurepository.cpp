@@ -89,3 +89,19 @@ QJsonArray MenuRepository::getMenu(int restaurantId) {
     }
     return menuArray;
 }
+
+//لود کردن منو یک رستوران خاص
+QList<QString> MenuRepository::getMenuItems(int restaurant_id) {
+    QList<QString> items;
+    QSqlQuery query(db);
+    query.prepare("SELECT name FROM menu_items WHERE restaurant_id = :rid");
+    query.bindValue(":rid", restaurant_id);
+    
+    if (query.exec()) {
+        while (query.next()) {
+            items.append(query.value("name").toString());
+        }
+    }
+    
+    return items;
+}
